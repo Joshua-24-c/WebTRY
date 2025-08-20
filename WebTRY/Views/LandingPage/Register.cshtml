@@ -1,0 +1,236 @@
+﻿@model WebTRY.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<style>
+    .container {
+        width: 890px;
+        min-height: 65px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        color: #000000;
+        background-color: #ffffff;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border-radius: 40px;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+        position: relative;
+        padding-bottom: 50px; /* extra space for form */
+    }
+
+    h1 {
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #396568;
+        font-weight: 700;
+        font-size: 60px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 65px;
+        width: 738.4px;
+        text-align: center;
+    }
+
+    h2 {
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #396568;
+        font-weight: 700;
+        font-size: 16px;
+        width: 738.4px;
+    }
+
+    p {
+        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #3D2C56;
+        line-height: 1.4;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 140px;
+        text-align: center;
+        width: 639px;
+    }
+
+    form {
+        font-family: 'Poppins', Arial, sans-serif;
+        margin: 250px auto 0 140px;
+        width: 70%;
+    }
+
+    input.form-control, select.form-select {
+        width: 100%;
+        border-radius: 20px;
+        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 16px;
+        color: #333;
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+    }
+
+        input.form-control::placeholder {
+            color: #B8B8B8;
+        }
+
+    .btn-primary {
+        background-color: #396568;
+        border-color: #396568;
+        border-radius: 20px;
+        padding: 10px 25px;
+        font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    .full-width-input {
+        width: 98%;
+        min-width: 98%; /* ensure it stretches fully */
+    }
+
+    .text-end {
+        margin-top: 35px;
+    }
+
+    .btn-close {
+        padding: 35px 25px;
+        border-color: red;
+    }
+
+        .btn-close:focus {
+            box-shadow: none; /* removes Bootstrap's focus shadow */
+            outline: none; /* removes browser’s default outline */
+        }
+</style>
+
+<div class="container table-responsive">
+    <h1>Internship Registration</h1>
+    <p class="instruct">
+        Please fill out your details in the registration form and upload any required documents.
+        Review your information carefully, then click “Submit” to complete your registration.
+    </p>
+
+    <!-- Registration Form -->
+
+    @using (Html.BeginForm("Register", "LandingPage", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        <div>
+            <h2>Personal Information</h2>
+
+            <!-- Row 1: Name -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name", id = "Fname" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name", id = "Lname" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Row 2: Contact -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", id = "email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Phone", id = "phone" })
+                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Row 3: Gender and Age -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.DropDownListFor(m => m.Gender, new SelectList(new[]
+                    {
+                          new { Value = "male", Text = "Male" },
+                          new { Value = "female", Text = "Female" },
+                          new { Value = "others", Text = "Others" }
+                    }, "Value", "Text"), "Select Gender", new { @class = "form-select", placeholder = "Gender", id = "gender" })
+                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", placeholder = "Age", id = "age" })
+                    @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>School Information</h2>
+
+            <!-- University Field -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    @Html.TextBoxFor(m => m.UnivName, new { @class = "form-control full-width-input", placeholder = "University Name", id = "univname" })
+                    @Html.ValidationMessageFor(m => m.UnivName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Row 5: Course Details -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Course, new { @class = "form-control", placeholder = "Course", id = "course" })
+                    @Html.ValidationMessageFor(m => m.Course, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6">
+                @Html.DropDownListFor(m => m.YearLevel, new SelectList(new[]
+                {
+                      new { Value = "first", Text = "First Year" },
+                      new { Value = "second", Text = "Second Year" },
+                      new { Value = "third", Text = "Third Year" },
+                      new { Value = "fourth", Text = "Fourth Year" }
+                }, "Value", "Text"), "Select Year Level", new { @class = "form-select", placeholder = "Year Level", id = "YLevel" })          
+                @Html.ValidationMessageFor(m => m.YearLevel, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <h2>Internship Information</h2>
+
+            <!-- Row 6: Internship Details -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Role, new { @class = "form-control", placeholder = "Job Role", id = "role" })
+                    @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Department, new { @class = "form-control", placeholder = "Assigned Department", id = "ADepartment" })
+                    @Html.ValidationMessageFor(m => m.Department, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 6: Hour -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.Time, new { @class = "form-control", placeholder = "Required Hour", id = "RHour" })
+                @Html.ValidationMessageFor(m => m.Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <!-- Row 7: File Upload -->
+        <!--<div class="row mb-3">
+            <div class="col-md-12">
+                <input type="file" class="form-control" aria-label="Upload Document">
+            </div>
+        </div>-->
+
+        <!-- Submit Button -->
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    }
+
+    <button type="button" class="btn-close" aria-label="Close" onclick="window.location.href='@Url.Action("Index","LandingPage")'"></button>
+</div>

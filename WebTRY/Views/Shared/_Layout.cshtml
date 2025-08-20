@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>Bastion Inc. - Intern</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .navbar {
+            padding-left: 5px !important;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.1); /* subtle top shadow */
+        }
+
+        .navbar-brand img {
+            height: 55px;
+        }
+
+        body {
+            background: url('/Assets/BG.png') no-repeat fixed;
+            background-size: 2046px 1246.74px;
+            background-position: -506px 50px;
+            background-attachment: scroll;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-light" style="background-color: white;">
+        <a class="navbar-brand" href="@Url.Action("Index", "LandingPage")">
+            <img src="~/Assets/Bastion Logo.svg" alt="My Logo" />
+        </a>
+    </nav>
+
+    <!-- Page Content -->
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

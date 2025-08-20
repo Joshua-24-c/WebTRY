@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+
+    h2 {
+        color: #2196F3;
+    }
+
+    h3 {
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #396568;
+        font-weight: 700;
+        font-size: 90px;
+        line-height: 81.9%;
+        position: absolute;
+        left: 750px;
+        top: 210px;
+        width: 738.4px;
+    }
+
+    .sub-text {
+        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #3D2C56;
+        line-height: 1.4;
+        position: absolute;
+        left: 750px;
+        top: 441.9px;
+        width: 638px;
+    }
+
+    .register-button {
+        font-family: 'Poppins', Arial, sans-serif;
+        position: absolute;
+        left: 750px;
+        top: 550px;
+        padding: 8px 26px;
+        font-size: 18px;
+        font-weight: 600;
+        background-color: #396568;
+        color: white;
+        text-decoration: none;
+        border-radius: 40px;
+        display: inline-block;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .qr-button {
+        display: flex; /* Use flexbox */
+        border-radius: 50%; /* Make it circular */
+        width: 55px;
+        height: 55px;
+        background-color: #396568;
+        color: white;
+        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 16px;
+        text-decoration: none; /* Remove underline */
+        position: absolute; /* Keep your positioning if needed */
+        left: 1400px;
+        top: 625px;
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+
+        /* manual alignment */
+        justify-content: flex-start; /* left, right, or center */
+        align-items: flex-start; /* top, bottom, or center */
+        padding-left: 14px; /* move content from left */
+        padding-top: 13.2px; /* move content from top */
+    }
+
+    .register-button:link,
+    .register-button:visited,
+    .register-button:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    .qr-button:link,
+    .qr-button:visited,
+    .qr-button:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    .qr-img {
+        width: 28px; /* image width */
+        height: 28px; /* image height */
+        object-fit: cover; /* makes image fit nicely inside the button */
+    }
+
+</style>
+
+<main aria-labelledby="title">
+    <h3>@ViewBag.HeadT</h3>
+    <p class="sub-text">@ViewBag.SubT</p>
+
+    <!-- Register Button -->
+    <div style="text-align:center; margin-top:25px;">
+        <a href="@Url.Action("Register", "LandingPage")" class="register-button">
+            Register
+        </a>
+    </div>
+
+    <div style="text-align: center; margin-top:25px;">
+        <a href="@Url.Action("QR", "LandingPage")" class="qr-button">
+            <img src="@Url.Content("~/Assets/QR icon.svg")" alt="QR Code" class="qr-img" />
+        </a>
+    </div>
+</main>
