@@ -76,7 +76,9 @@
             color: #B8B8B8;
         }
 
-    .btn-primary {
+    .submit-btn {
+        color: white;
+        font-family: 'Poppins', Arial, sans-serif;
         background-color: #396568;
         border-color: #396568;
         border-radius: 20px;
@@ -146,7 +148,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     @Html.DropDownListFor(m => m.Gender, new SelectList(new[]
-                    {
+                     {
                           new { Value = "male", Text = "Male" },
                           new { Value = "female", Text = "Female" },
                           new { Value = "others", Text = "Others" }
@@ -180,14 +182,14 @@
                 </div>
 
                 <div class="col-md-6">
-                @Html.DropDownListFor(m => m.YearLevel, new SelectList(new[]
-                {
-                      new { Value = "first", Text = "First Year" },
-                      new { Value = "second", Text = "Second Year" },
-                      new { Value = "third", Text = "Third Year" },
-                      new { Value = "fourth", Text = "Fourth Year" }
-                }, "Value", "Text"), "Select Year Level", new { @class = "form-select", placeholder = "Year Level", id = "YLevel" })          
-                @Html.ValidationMessageFor(m => m.YearLevel, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(m => m.YearLevel, new SelectList(new[]
+                         {
+                          new { Value = "first", Text = "First Year" },
+                          new { Value = "second", Text = "Second Year" },
+                          new { Value = "third", Text = "Third Year" },
+                          new { Value = "fourth", Text = "Fourth Year" }
+                    }, "Value", "Text"), "Select Year Level", new { @class = "form-select", placeholder = "Year Level", id = "YLevel" })
+                    @Html.ValidationMessageFor(m => m.YearLevel, "", new { @class = "text-danger" })
                 </div>
 
             </div>
@@ -218,6 +220,27 @@
         </div>
 
 
+
+        <div>
+            <h2>Account Information</h2>
+
+            <!-- Row 7: Internship Details -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Username", id = "Uname" })
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Password", id = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+
+
         <!-- Row 7: File Upload -->
         <!--<div class="row mb-3">
             <div class="col-md-12">
@@ -227,7 +250,7 @@
 
         <!-- Submit Button -->
         <div class="text-end">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn submit-btn">Submit</button>
         </div>
 
     }

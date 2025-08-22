@@ -1,4 +1,6 @@
 ﻿
+
+
 @{
     ViewBag.Title = "QR";
 }
@@ -6,7 +8,7 @@
 <style>
     .container {
         width: 890px;
-        height: 700px;
+        height: 600px;
         display: flex;
         justify-content: center;
         align-content: center;
@@ -73,6 +75,67 @@
     #qr-reader__dashboard_section_csr button[title="Stop Scanning"] {
         display: none !important;
     }
+
+    #startBtn {
+        position: absolute;
+        top: 475px;
+        left: 315px;
+        padding: 8px 15px;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: #396568;
+        color: white;
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    }
+
+    #stopBtn {
+        position: absolute;
+        top: 475px;
+        left: 450px;
+        padding: 8px 13px;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: #396568;
+        color: white;
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    }
+
+    #uploadBtn {
+        position: absolute;
+        top: 530px;
+        left: 411px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #396568;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .btn-close {
+        position: absolute;
+        left: 812px;
+        padding: 35px 25px;
+        border-color: red;
+    }
+
+    .btn-close:focus {
+            box-shadow: none;
+            outline: none;
+    }
+
+    #cam {
+        position: absolute;
+        top: 54%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85px;
+        height: 85px;
+    }
+
 </style>
 
 <div class="container table-responsive">
@@ -82,12 +145,18 @@
     </p>
 
     <div class="cam-container">
+        <img src="~/Assets/camera icon.svg" alt="Cam Icon" id="cam">
         <div id="qr-reader"></div>
     </div>
 
-    <button id="startBtn" class="btn">Start Scanning</button>
+    <button id="startBtn" class="btn ">Start Scanning</button>
     <button id="stopBtn" class="btn">Stop Scanning</button>
 
+    <input type="file" id="uploadFile" accept="image/*" style="display:none;">
+
+    <label for="uploadFile" id="uploadBtn">Upload QR</label>
+
+    <button type="button" class="btn-close" aria-label="Close" onclick="window.location.href='@Url.Action("Index","LandingPage")'"></button>
 </div>
 
 <!-- Import Html5-Qrcode library -->
@@ -95,29 +164,43 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-        const html5QrCode = new Html5Qrcode("qr-reader"); // Use the low-level class
+        const html5QrCode = new Html5Qrcode("qr-reader");
 
         function onScanSuccess(decodedText) {
             alert("Scanned: " + decodedText);
         }
 
-        const config = { fps: 10, qrbox: 250 };
+        const config = { fps: 10, qrbox: 225 };
 
-        // Custom Start button
+        // Start button
         document.getElementById("startBtn").addEventListener("click", () => {
             html5QrCode.start(
-                { facingMode: "environment" }, // or cameraId
+                { facingMode: "environment" }, 
                 config,
                 onScanSuccess
             ).catch(err => console.error("Failed to start scanner:", err));
         });
 
-        // Custom Stop button
+        // Stop button
         document.getElementById("stopBtn").addEventListener("click", () => {
             html5QrCode.stop().then(() => {
-                html5QrCode.clear(); // clear camera preview
+                html5QrCode.clear();
                 console.log("Scanner stopped");
             }).catch(err => console.error("Failed to stop scanner:", err));
+        });
+
+        // Upload File
+        document.getElementById("uploadFile").addEventListener("change", (e) => {
+            if (e.target.files.length === 0) return;
+
+            const file = e.target.files[0];
+            html5QrCode.scanFile(file, true)
+                .then(decodedText => {
+                    alert("Scanned from file: " + decodedText);
+                })
+                .catch(err => {
+                    alert("File scan failed: " + err);
+                });
         });
 
     });

@@ -46,6 +46,11 @@ namespace WebTRY.Models
         [Required(ErrorMessage = " Required time is required.")]
         public int Time { get; set; }
 
+        [Required(ErrorMessage = " Username is required.")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = " Password is required.")]
+        public int Password { get; set; }
 
     }
 }

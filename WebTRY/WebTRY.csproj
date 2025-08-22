@@ -130,6 +130,7 @@
   <ItemGroup>
     <Content Include="Assets\Bastion Logo.svg" />
     <Content Include="Assets\BG.png" />
+    <Content Include="Assets\camera icon.svg" />
     <Content Include="Assets\QR icon.svg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
